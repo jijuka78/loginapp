@@ -35,12 +35,12 @@ public class UIServiceImpl implements UIService {
 		return users;
 	}
 	
-	@Override
-	public User retrieveUser(String userId) {
-		String url ="/users";
-		UserBean userBeans = restTemplate.getForObject(url, UserBean.class);
-		User user = this.modelMapper.map(userBeans, User.class);
-		return user;
-	}
+//	@Override
+//	public User retrieveUser(String userId) {
+//		String url ="/users";
+//		UserBean userBeans = restTemplate.getForObject(url, UserBean.class);
+//		User user = this.modelMapper.map(userBeans, User.class);
+//		return user;
+//	}
 
 }
