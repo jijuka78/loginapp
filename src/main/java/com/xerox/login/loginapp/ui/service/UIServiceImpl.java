@@ -28,12 +28,19 @@ public class UIServiceImpl implements UIService {
 	@Override
 	public List<User> retrieveAllUsers() {
 		
-		String url ="http://localhost:8080/fetchUsers";
-		//RestTemplate restTemplate = new RestTemplate();
+		String url ="/fetchUsers";
 		UserBean[] userBeans = restTemplate.getForObject(url, UserBean[].class);
 		User[] userArray = this.modelMapper.map(userBeans, User[].class);
 		List<User> users = Arrays.asList(userArray);
 		return users;
+	}
+	
+	@Override
+	public User retrieveUser(String userId) {
+		String url ="/users";
+		UserBean userBeans = restTemplate.getForObject(url, UserBean.class);
+		User user = this.modelMapper.map(userBeans, User.class);
+		return user;
 	}
 
 }
