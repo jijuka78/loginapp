@@ -22,6 +22,12 @@ public class LoginAppConfiguration {
 		return builder.setConnectTimeout(Duration.ofMillis(3000))
 	  .setReadTimeout(Duration.ofMillis(3000)) .build(); 
 	}
+	
+//	@Bean
+//	public SecurityFilterChain filterChain(HttpSecurity http) {
+//		http.authorizeSecurityRequests(auth -> auth.anyRequest().authenticated());
+//		return http.build();
+//	}
 	 
 }
 
