@@ -18,3 +18,31 @@ url to get to UI:
     http://localhost:8080/menu
     or
     http://localhost:8080/menu?name=John
+url to api:
+
+GET
+http://localhost:8080/fetchUsers
+
+    GET
+    http://localhost:8080/user/jui78
+    
+    
+    POST
+    http://localhost:8080/user
+    body
+       {
+            "userId": "hat067",
+            "password": "YFY$^%$^"
+        }
+    	
+    PUT
+    http://localhost:8080/user/jui78
+    body
+       {
+            "userId": "hat067",
+            "password": "YFY$^%$^"
+        }
+    
+    
+    DELETE
+    http://localhost:8080/user/jik786
