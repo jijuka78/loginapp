@@ -18,10 +18,11 @@ url to get to UI:
     http://localhost:8080/menu
     or
     http://localhost:8080/menu?name=John
+    
 url to api:
 
-GET
-http://localhost:8080/fetchUsers
+    GET
+    http://localhost:8080/fetchUsers
 
     GET
     http://localhost:8080/user/jui78
