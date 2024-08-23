@@ -2,15 +2,18 @@ package com.xerox.login.loginapp.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xerox.login.loginapp.model.User;
+import com.xerox.login.loginapp.ui.model.User;
 
 
 @RestController
-public class LoginController {
+public class UserController {
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping ("/fetchUsers")
 	public List<User> retrieveAllUsers(){
@@ -20,6 +23,9 @@ public class LoginController {
 				new User("hat067", "YFY$^%$^")
 				);
 	}
+	
+	
+	
 	
 	
 }

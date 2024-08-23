@@ -1,4 +1,4 @@
-package com.xerox.login.loginapp.model;
+package com.xerox.login.loginapp.ui.model;
 
 public class User {
 
@@ -15,6 +15,10 @@ public class User {
 		super();
 		this.userId = userId;
 		this.password = password;
+	}
+	
+	public User() {
+		super();
 	}
 	public String getPassword() {
 		return password;
