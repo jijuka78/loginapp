@@ -47,3 +47,8 @@ url to api:
     
     DELETE
     http://localhost:8080/user/jik786
+Database 
+    Type H2
+    Table Name: USERDB
+    H2 database console  - http://localhost:8080/h2-console
+    Datasource URL = jdbc:h2:mem:testdb
