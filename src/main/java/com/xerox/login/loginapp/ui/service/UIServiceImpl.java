@@ -1,19 +1,16 @@
 package com.xerox.login.loginapp.ui.service;
 
-import java.lang.reflect.Array;
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.xerox.login.loginapp.exception.UserNotFoundException;
 import com.xerox.login.loginapp.model.UserBean;
 import com.xerox.login.loginapp.ui.config.UserUIConfiguration;
 import com.xerox.login.loginapp.ui.model.User;
@@ -21,6 +18,8 @@ import com.xerox.login.loginapp.ui.model.User;
 
 @Service
 public class UIServiceImpl implements UIService {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -40,11 +39,15 @@ public class UIServiceImpl implements UIService {
 		return users;
 	}
 	
+	
 	@Override
 	public User retrieveUser(String userId) {
 		String url = userConfig.getUrl() + "/user/" + userId;
 		UserBean userBeans = restTemplate.getForObject(url, UserBean.class);
-		User user = this.modelMapper.map(userBeans, User.class);
+		User user = null;
+		if(userBeans != null) {
+			user = this.modelMapper.map(userBeans, User.class);
+		}
 		return user;
 	}
 	
@@ -60,6 +63,7 @@ public class UIServiceImpl implements UIService {
 	public User updateUser(UserBean user, String userId) {
 		String url = userConfig.getUrl() + "/user/" + userId;
 		restTemplate.put(url, user);
+
 		User newUser = this.modelMapper.map(user, User.class);
 		return newUser;
 	}
