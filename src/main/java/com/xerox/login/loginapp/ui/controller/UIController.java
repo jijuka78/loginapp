@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xerox.login.loginapp.model.UserBean;
 import com.xerox.login.loginapp.ui.model.User;
 import com.xerox.login.loginapp.ui.service.UIService;
 
@@ -31,14 +32,13 @@ public class UIController {
 	}
 	
 	@PostMapping("/getUser")
-	public String addUser(@RequestParam(value="name", required=false)  String name, 
+	public String getUser(@RequestParam(value="name", required=false)  String name, 
 			@RequestParam(value="userId", required=true)  String userId,
 			ModelMap  modelMap) {
 		logger.debug("name=" + name);
 		modelMap.put("name", (name != null && name.length() > 0)? name.trim().toUpperCase():"you");
-		String password = ""; //TODO getPassword
-		modelMap.put("message", "User with Userid:" + userId  + " and Password:" + password + " is fetched");
-		//api.addUser(user)
+		User user = uIService.retrieveUser(userId);
+		modelMap.put("message", user + " is fetched");
 		return "menu";
 	}
 	
@@ -57,7 +57,7 @@ public class UIController {
 		logger.debug("name=" + name);
 		modelMap.put("name", (name != null && name.length() > 0)? name.trim().toUpperCase():"you");
 		modelMap.put("message", "User with Userid:" + userId  + "is created");
-		//api.addUser(user)
+		uIService.createUser(new UserBean(userId, password));
 		return "menu";
 	}
 	
@@ -83,7 +83,7 @@ public class UIController {
 		logger.debug("name=" + name);
 		modelMap.put("name", (name != null && name.length() > 0)? name.trim().toUpperCase():"you");
 		modelMap.put("message", "User with Userid:" + userId  + "is updated");
-		//api.addUser(user)
+		uIService.updateUser(new UserBean(userId, password), userId);
 		return "menu";
 	}
 	
@@ -96,13 +96,12 @@ public class UIController {
 	
 	@PostMapping("/removeUser")
 	public String removeUser(@RequestParam(value="name", required=false)  String name, 
-			@RequestParam(value="userId", required=true)  String userId, 
-			@RequestParam(value="password", required=true)  String password, 
+			@RequestParam(value="userId", required=true)  String userId,
 			ModelMap  modelMap) {
 		logger.debug("name=" + name);
 		modelMap.put("name", (name != null && name.length() > 0)? name.trim().toUpperCase():"you");
 		modelMap.put("message", "User with Userid:" + userId  + "is removed");
-		//api.addUser(user)
+		uIService.deleteUser(userId);
 		return "menu";
 	}
 	

@@ -39,9 +39,6 @@ public class UserController {
 	@GetMapping("/user/{userId}")
 	public UserBean getUser(@PathVariable (value="userId", required=true) String userId) {
 		UserBean userExisting = userRepository.findByUserId(userId);
-		if(userExisting == null) {
-			throw new UserNotFoundException(userId);
-		}
 		return userExisting;
 	}
 	
